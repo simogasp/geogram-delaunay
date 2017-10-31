@@ -1,4 +1,6 @@
 
+find_package(Threads REQUIRED)
+
 set(SOURCES
         basic/algorithm.cpp
         basic/assert.cpp
@@ -35,6 +37,8 @@ target_include_directories(delaunay
         $<INSTALL_INTERFACE:include>)
 
 target_compile_definitions(delaunay PUBLIC "-DGEOGRAM_PSM")
+
+target_link_libraries(delaunay PRIVATE Threads::Threads)
 
 set_target_properties(delaunay PROPERTIES DEBUG_POSTFIX "d")
 set_target_properties(delaunay PROPERTIES
