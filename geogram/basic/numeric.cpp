@@ -70,7 +70,7 @@ namespace GEO {
 #ifdef GEO_OS_WINDOWS
             return (_isnan(x) != 0) || (_finite(x) == 0);
 #else
-            return isnan(x) || !isfinite(x);
+            return std::isnan(x) || !std::isfinite(x);
 #endif
         }
 
@@ -89,12 +89,12 @@ namespace GEO {
 #ifdef GEO_OS_WINDOWS
             return (_isnan(x) != 0) || (_finite(x) == 0);
 #else
-            return isnan(x) || !isfinite(x);
+            return std::isnan(x) || !std::isfinite(x);
 #endif            
         }
 
 #ifdef GEO_COMPILER_GCC
-#pragma GCC diagnostic pop            
+#pragma GCC diagnostic pop
 #endif            
 
         void random_reset() {
