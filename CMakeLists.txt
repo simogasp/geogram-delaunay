@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1.3)
 
-project(delaunay LANGUAGES C CXX VERSION 1.5.2)
+project(delaunay LANGUAGES C CXX VERSION 1.5.3)
 
 set(CMAKE_CXX_STANDARD 11)
 
