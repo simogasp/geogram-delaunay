@@ -89,6 +89,9 @@ namespace {
     using namespace GEO;
     using namespace CmdLine;
 
+    int geo_argc = 0;
+    char** geo_argv = nil;
+    
     // True if displaying help in a way that
     // it will be easily processed by help2man
     bool man_mode = false;
@@ -314,6 +317,9 @@ namespace {
     bool parse_internal(
         int argc, char** argv, std::vector<std::string>& unparsed_args
     ) {
+	geo_argc = argc;
+	geo_argv = argv;
+	
 	parse_config_file(argc, argv);
 	
         bool ok = true;
@@ -524,6 +530,14 @@ namespace GEO {
             desc_ = nil;
         }
 
+	int argc() {
+	    return geo_argc;
+	}
+
+	char** argv() {
+	    return geo_argv;
+	}
+	
         bool parse(
             int argc, char** argv, std::vector<std::string>& unparsed_args,
             const std::string& additional_arg_specs
