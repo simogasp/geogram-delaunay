@@ -8,6 +8,8 @@ else()
     find_package(delaunay CONFIG REQUIRED)
 endif()
 
+set(CMAKE_CXX_STANDARD 11)
+
 add_executable(delaunaySample main.cpp)
 
 target_link_libraries(delaunaySample delaunay::delaunay)

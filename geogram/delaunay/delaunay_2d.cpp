@@ -196,7 +196,7 @@ namespace GEO {
     void Delaunay2d::set_vertices(
         index_t nb_vertices, const double* vertices
     ) {
-        Stopwatch* W = nil;
+        Stopwatch* W = nullptr;
         if(benchmark_mode_) {
             W = new Stopwatch("DelInternal");
         }
@@ -364,13 +364,13 @@ namespace GEO {
                 old2new[infinite_ptr] = finite_ptr;
                 ++nb_finite_cells_;
                 for(index_t lf=0; lf<3; ++lf) {
-                    geo_swap(
+		    std::swap(
                         cell_to_cell_store_[3*finite_ptr + lf],
                         cell_to_cell_store_[3*infinite_ptr + lf]
                     );
                 }
                 for(index_t lv=0; lv<3; ++lv) {
-                    geo_swap(
+		    std::swap(
                         cell_to_v_store_[3*finite_ptr + lv],
                         cell_to_v_store_[3*infinite_ptr + lv]
                     );
@@ -609,7 +609,7 @@ namespace GEO {
         index_t t = hint;
         index_t t_pred = NO_TRIANGLE;
         Sign orient_local[3];
-        if(orient == nil) {
+        if(orient == nullptr) {
             orient = orient_local;
         }
 
@@ -946,7 +946,7 @@ namespace GEO {
             return false;
         }
 	if(s == NEGATIVE) {
-	    geo_swap(iv1,iv2);
+	    std::swap(iv1,iv2);
 	}
 	    
         // Create the first triangle
