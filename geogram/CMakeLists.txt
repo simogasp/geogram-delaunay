@@ -25,9 +25,12 @@ set(SOURCES
         delaunay/delaunay_2d.cpp
         delaunay/delaunay_3d.cpp
         delaunay/parallel_delaunay_3d.cpp
+        delaunay/periodic.cpp
+        delaunay/periodic_delaunay_3d.cpp
         mesh/mesh_reorder.cpp
         numerics/multi_precision.cpp
-        numerics/predicates.cpp)
+        numerics/predicates.cpp
+        voronoi/convex_cell.cpp)
 
 add_library(delaunay ${SOURCES})
 
