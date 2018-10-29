@@ -56,11 +56,19 @@
 #include <geogram/mesh/mesh_io.h>
 #include <geogram/version.h>
 #include <geogram/bibliography/bibliography.h>
+#include <geogram/image/image.h>
+#include <geogram/image/image_library.h>
+#include <geogram/image/image_serializer_stb.h>
+#include <geogram/image/image_serializer_xpm.h>
+#include <geogram/image/image_serializer_pgm.h>
+
 #else
 #include <geogram/basic/psm.h>
 #endif
+
 #include <sstream>
 #include <iomanip>
+
 
 #ifdef GEO_OS_EMSCRIPTEN
 #include <emscripten.h>
@@ -142,6 +150,20 @@ namespace GEO {
             }
         );
 #endif
+
+#ifndef GEOGRAM_PSM
+        ImageLibrary::initialize() ;
+
+        geo_declare_image_serializer<ImageSerializerSTBReadWrite>("png");
+        geo_declare_image_serializer<ImageSerializerSTBReadWrite>("jpg");
+        geo_declare_image_serializer<ImageSerializerSTBReadWrite>("jpeg");
+        geo_declare_image_serializer<ImageSerializerSTBReadWrite>("tga");
+        geo_declare_image_serializer<ImageSerializerSTBReadWrite>("bmp");
+	
+        geo_declare_image_serializer<ImageSerializer_xpm>("xpm") ;
+        geo_declare_image_serializer<ImageSerializer_pgm>("pgm") ;		
+#endif
+	
 	initialized = true;
     }
 
@@ -156,8 +178,9 @@ namespace GEO {
         }
 
         PCK::terminate();
-	
-#ifndef GEOGRAM_PSM					
+
+#ifndef GEOGRAM_PSM
+        ImageLibrary::terminate() ;
 	Biblio::terminate();
 #endif
 	
