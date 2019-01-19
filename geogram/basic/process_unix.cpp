@@ -345,15 +345,6 @@ namespace {
     }
 
     /**
-     * Catches unexpected C++ exceptions
-     */
-    GEO_NORETURN_DECL void unexpected_handler() GEO_NORETURN;
-    
-    void unexpected_handler() {
-        abnormal_program_termination("function unexpected() was called");
-    }
-
-    /**
      * Catches uncaught C++ exceptions
      */
     GEO_NORETURN_DECL void terminate_handler() GEO_NORETURN;
@@ -521,8 +512,7 @@ namespace GEO {
             sigemptyset(&sa.sa_mask);
             sigaction(SIGFPE, &sa, &old_sa);
 
-            // Install unexpected and uncaught c++ exception handlers
-            std::set_unexpected(unexpected_handler);
+            // Install uncaught c++ exception handlers
             std::set_terminate(terminate_handler);
 
             // Install memory allocation handler
