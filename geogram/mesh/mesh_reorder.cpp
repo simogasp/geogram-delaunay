@@ -793,7 +793,7 @@ namespace {
         ) :
             M_(M)
         {
-            geo_debug_assert(e > b);
+            geo_debug_assert(e >= b);
 	    geo_cite_with_info(
 		"WEB:SpatialSorting",
 		"The implementation of spatial sort in GEOGRAM is inspired by "
@@ -1472,7 +1472,7 @@ namespace GEO {
        
         //The next three lines replace the following commented-out line
         //(random_shuffle is deprecated in C++17, and they call this 
-        // progess...)
+        // progress...)
         // std::random_shuffle(b,e);
         std::random_device rng;
         std::mt19937 urng(rng());

@@ -770,7 +770,7 @@ namespace GEO {
         SleepConditionVariableCS(c, m, INFINITE);
         return 0;
     }
-    
+   
 #endif    
     
 }
