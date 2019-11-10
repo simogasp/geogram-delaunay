@@ -297,10 +297,7 @@ namespace {
         double center(index_t f) const {
             double result = 0.0;
 	    double s = 1.0 / double(mesh_.facets.nb_vertices(f));
-            for(
-                index_t c = mesh_.facets.corners_begin(f);
-                c < mesh_.facets.corners_end(f); ++c
-            ) {
+            for(index_t c: mesh_.facets.corners(f)) {
                 result += s*mesh_.vertices.point_ptr(
                     mesh_.facet_corners.vertex(c)
 		)[COORD]; 
@@ -442,9 +439,7 @@ namespace {
          */
         double center(index_t t) const {
             double result = 0.0;
-            for(
-                index_t lv = 0; lv < 4; ++lv
-            ) {
+            for(index_t lv = 0; lv < 4; ++lv) {
                 result += mesh_.vertices.point_ptr(
                     mesh_.cells.vertex(t, lv)
                 )[COORD];
@@ -586,9 +581,7 @@ namespace {
          */
         double center(index_t c) const {
             double result = 0.0;
-            for(
-                index_t lv = 0; lv < mesh_.cells.nb_vertices(c); ++lv
-            ) {
+            for(index_t lv = 0; lv < mesh_.cells.nb_vertices(c); ++lv) {
                 result += mesh_.vertices.point_ptr(
                     mesh_.cells.vertex(c, lv)
                 )[COORD];
@@ -978,7 +971,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.vertices.nb());
-        for(index_t i = 0; i < M.vertices.nb(); i++) {
+        for(index_t i: M.vertices) {
             sorted_indices[i] = i;
         }
         HilbertSort3d<Hilbert_vcmp, Mesh>(
@@ -1000,7 +993,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.facets.nb());
-        for(index_t i = 0; i < M.facets.nb(); i++) {
+        for(index_t i: M.facets) {
             sorted_indices[i] = i;
         }
         HilbertSort3d<Hilbert_fcmp, Mesh>(
@@ -1021,7 +1014,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.cells.nb());
-        for(index_t i = 0; i < M.cells.nb(); i++) {
+        for(index_t i: M.cells) {
             sorted_indices[i] = i;
         }
         if(M.cells.are_simplices()) {
@@ -1048,7 +1041,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.vertices.nb());
-        for(index_t i = 0; i < M.vertices.nb(); i++) {
+        for(index_t i: M.vertices) {
             sorted_indices[i] = i;
         }
         HilbertSort3d<Morton_vcmp, Mesh>(
@@ -1069,7 +1062,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.facets.nb());
-        for(index_t i = 0; i < M.facets.nb(); i++) {
+        for(index_t i: M.facets) {
             sorted_indices[i] = i;
         }
         HilbertSort3d<Morton_fcmp, Mesh>(
@@ -1090,7 +1083,7 @@ namespace {
         const Mesh& M, vector<index_t>& sorted_indices
     ) {
         sorted_indices.resize(M.cells.nb());
-        for(index_t i = 0; i < M.cells.nb(); i++) {
+        for(index_t i: M.cells) {
             sorted_indices[i] = i;
         }
         if(M.cells.are_simplices()) {
@@ -1272,7 +1265,7 @@ namespace GEO {
         //The next three lines replace the following commented-out line
         //(random_shuffle is deprecated in C++17, and they call this 
         // progess...)
-        //std::random_shuffle(sorted_indices.begin(), sorted_indices.end());       
+        //std::random_shuffle(sorted_indices.begin(), sorted_indices.end()); 
         std::random_device rng;
         std::mt19937 urng(rng());
         std::shuffle(sorted_indices.begin(), sorted_indices.end(), urng);

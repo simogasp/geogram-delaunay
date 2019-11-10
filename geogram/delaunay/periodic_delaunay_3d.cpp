@@ -1190,7 +1190,8 @@ namespace GEO {
 		    hi, hj, hk, hl
 		);
 	    }
-	    
+
+	    // Note: in periodic mode, SOS mode is lexicographic.
 	    double V[4][4];
 	    get_lifted_vertex(i,V[0]);
 	    get_lifted_vertex(j,V[1]);
@@ -1228,6 +1229,7 @@ namespace GEO {
 	    }
 
 	    // Periodic mode.
+	    // Note: in periodic mode, SOS mode is lexicographic.	    
 	    double V[5][4];	    
 	    get_lifted_vertex(i,V[0]);
 	    get_lifted_vertex(j,V[1]);
